@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNA Redesign Concept | Interactive Prototype</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            una: {
+              purple: '#46166b',
+              dark: '#2a0d46',
+              gold: '#db9f11',
+              light: '#f9f6fa'
+            }
+          },
+          fontFamily: {
+            sans: ['Work Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-[#f3f3f3] text-gray-800 antialiased overflow-x-hidden">
+
+  <!-- ================= HEADER & NAV ================= -->
+  <header id="mainNav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent text-white">
+    
+    <!-- Top Utility Bar -->
+    <div class="bg-una-dark text-xs py-2 px-4 lg:px-6 flex justify-between items-center transition-opacity duration-300" id="topBar">
+      <div class="flex opacity-80">
+        <span>(256) 765-4100</span>
+      </div>
+      <!-- 상단 유틸리티 링크 스타일 통일 (볼드, 노란색 제거) -->
+      <div class="flex gap-4 ml-auto font-medium">
+        <a href="https://www.una.edu/visit/index.html" target="_blank" class="hover:text-una-gold transition hidden sm:inline">Visit</a>
+        <a href="https://una.instructure.com/" target="_blank" class="hover:text-una-gold transition">Canvas</a>
+        <a href="https://experience.elluciancloud.com/uona" target="_blank" class="hover:text-una-gold transition">Portal</a>
+        <a href="https://www.una.edu/library/index.html" target="_blank" class="hover:text-una-gold transition">Library</a>
+        <a href="https://www.una.edu/directory/" target="_blank" class="hover:text-una-gold transition hidden sm:inline">Directory</a>
+      </div>
+    </div>
+    
+    <!-- Main Navbar -->
+    <div class="px-4 lg:px-6 py-3 lg:py-4 flex justify-between items-center border-b border-white/10 transition-colors duration-300" id="navContainer">
+      
+      <!-- 공식 로고 -->
+      <a href="https://www.una.edu/" class="relative flex items-center h-10 w-40 lg:h-14 lg:w-60 cursor-pointer hover:opacity-90 transition shrink-0">
+        <img src="https://www.una.edu/images/homepage/una_horiz_fulclr_dkbg.svg" 
+             alt="University of North Alabama Logo" 
+             class="absolute top-1/2 left-0 lg:-left-2 -translate-y-1/2 h-28 lg:h-40 w-auto max-w-none drop-shadow-md">
+      </a>
+      
+      <!-- 데스크톱용 메인 메뉴 -->
+      <nav class="hidden lg:flex gap-8 font-semibold tracking-wide text-sm ml-auto mr-8">
+        <a href="https://www.una.edu/apply/index.html" target="_blank" class="hover:text-una-gold transition">APPLY</a>
+        <a href="https://www.una.edu/academics/index.html" target="_blank" class="hover:text-una-gold transition">LEARN</a>
+        <a href="https://www.una.edu/studentaffairs/index.html" target="_blank" class="hover:text-una-gold transition">CONNECT</a>
+        <a href="http://www.roarlions.com/" target="_blank" class="hover:text-una-gold transition">SPORTS</a>
+        <a href="https://www.una.edu/alumni/index.html" target="_blank" class="hover:text-una-gold transition">ALUMNI</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <!-- 데스크톱용 검색창 -->
+        <form action="https://www.una.edu/search/index.html" method="get" target="_blank" class="hidden lg:flex items-center bg-white/10 rounded-full px-4 py-1.5 backdrop-blur border border-white/20">
+          <input type="text" name="q" placeholder="Search UNA.edu" class="bg-transparent border-none text-white text-sm outline-none placeholder-white/60 w-32 focus:w-48 transition-all font-medium">
+          <button type="submit">
+            <svg class="w-4 h-4 text-white/80 hover:text-white cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </button>
+        </form>
+
+        <!-- 모바일용 햄버거 메뉴 버튼 -->
+        <button id="mobileMenuBtn" class="lg:hidden text-white hover:text-una-gold focus:outline-none p-2 transition-colors z-50">
+          <svg class="w-8 h-8 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 모바일 드롭다운 메뉴 -->
+    <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-una-dark/95 backdrop-blur-md border-t border-white/10 shadow-2xl transition-all duration-300">
+      <nav class="flex flex-col px-6 py-4 text-white font-semibold text-lg">
+        <a href="https://www.una.edu/apply/index.html" target="_blank" class="py-4 border-b border-white/10 hover:text-una-gold transition">APPLY</a>
+        <a href="https://www.una.edu/academics/index.html" target="_blank" class="py-4 border-b border-white/10 hover:text-una-gold transition">LEARN</a>
+        <a href="https://www.una.edu/studentaffairs/index.html" target="_blank" class="py-4 border-b border-white/10 hover:text-una-gold transition">CONNECT</a>
+        <a href="http://www.roarlions.com/" target="_blank" class="py-4 border-b border-white/10 hover:text-una-gold transition">SPORTS</a>
+        <a href="https://www.una.edu/alumni/index.html" target="_blank" class="py-4 hover:text-una-gold transition">ALUMNI</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="h-screen w-full relative flex items-center justify-center overflow-hidden pt-20">
+    <video autoplay loop muted playsinline class="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover scale-105">
+      <source src="https://www.una.edu/grow-your-world/video/GYW_Loop_Ftn_cutDown.mp4" type="video/mp4">
+    </video>
+    
+    <div class="absolute z-10 inset-0 bg-gradient-to-r from-una-dark/90 via-una-purple/70 to-una-dark/60"></div>
+
+    <div class="container mx-auto px-6 md:px-12 relative z-20 text-center flex flex-col items-center">
+      <div class="max-w-4xl fade-in-up">
+        <div class="mb-8 inline-block">
+          <div class="w-48 h-12 mx-auto bg-[url('https://www.una.edu/images/homepage/gyw_gold.svg')] bg-center bg-contain bg-no-repeat filter invert brightness-0 mb-4"></div>
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight drop-shadow-lg">
+          Choose Your <br> <span class="text-una-gold">Student Experience</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-normal leading-relaxed drop-shadow">
+          We’ve refreshed our identity to better support our message – that all students deserve the opportunity to realize their full potential.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://www.una.edu/admissions" target="_blank" class="bg-una-gold text-una-dark font-bold text-lg px-10 py-4 rounded shadow-2xl hover:bg-yellow-400 hover:-translate-y-1 transition-all duration-300">
+            On Campus
+          </a>
+          <a href="https://www.una.edu/online" target="_blank" class="bg-transparent border-2 border-white text-white font-bold text-lg px-10 py-4 rounded hover:bg-white hover:text-una-dark hover:-translate-y-1 transition-all duration-300">
+            Online Programs
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRESS ROOM ================= -->
+  <section class="py-24 bg-white relative z-20">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="flex justify-between items-end mb-12 fade-in-up">
+        <div>
+          <h2 class="text-4xl font-black text-una-dark tracking-tight">From the Press Room</h2>
+          <div class="w-20 h-1.5 bg-una-gold mt-4"></div>
+        </div>
+        <a href="https://www.una.edu/pressroom/" target="_blank" class="text-una-purple font-bold hover:text-una-gold transition hidden md:block">View All News &rarr;</a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <article class="bg-[#f9f9f9] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group fade-in-up border border-gray-100">
+          <div class="h-56 overflow-hidden relative">
+            <div class="absolute inset-0 bg-una-purple/20 group-hover:bg-transparent transition duration-300 z-10"></div>
+            <img src="https://www.una.edu/images/pressroom/best-reg-uni-5-years.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-8">
+            <h3 class="font-bold text-xl text-gray-900 mb-4 leading-snug group-hover:text-una-purple transition">
+              UNA Ranked Among U.S. News Best Regional Universities For 5 Consecutive Years
+            </h3>
+            <p class="text-gray-600 text-sm mb-6 line-clamp-3">For a fifth consecutive year, the University of North Alabama has ranked among the Best Regional Universities (South) category in the U.S. News...</p>
+            <a href="https://www.una.edu/pressroom/" target="_blank" class="inline-flex items-center justify-center px-6 py-2 bg-una-purple text-una-gold font-bold rounded text-sm hover:bg-una-dark transition">Read More</a>
+          </div>
+        </article>
+
+        <article class="bg-[#f9f9f9] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group fade-in-up border border-gray-100" style="transition-delay: 100ms;">
+          <div class="h-56 overflow-hidden relative">
+            <div class="absolute inset-0 bg-una-purple/20 group-hover:bg-transparent transition duration-300 z-10"></div>
+            <img src="https://www.una.edu/images/pressroom/blasingham-podcast.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-8">
+            <h3 class="font-bold text-xl text-gray-900 mb-4 leading-snug group-hover:text-una-purple transition">
+              Alumnus Jim Blasingame Makes Unique Catalog Available via Gift
+            </h3>
+            <p class="text-gray-600 text-sm mb-6 line-clamp-3">Jim Blasingame ’72 has made his significant and vital body of work available to all comers after his gift to the Sanders College of Business and Collier Library...</p>
+            <a href="https://www.una.edu/pressroom/" target="_blank" class="inline-flex items-center justify-center px-6 py-2 bg-una-purple text-una-gold font-bold rounded text-sm hover:bg-una-dark transition">Read More</a>
+          </div>
+        </article>
+
+        <article class="bg-[#f9f9f9] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group fade-in-up border border-gray-100" style="transition-delay: 200ms;">
+          <div class="h-56 overflow-hidden relative">
+            <div class="absolute inset-0 bg-una-purple/20 group-hover:bg-transparent transition duration-300 z-10"></div>
+            <img src="https://www.una.edu/images/pressroom/wendell-gunn-chronicles.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-8">
+            <h3 class="font-bold text-xl text-gray-900 mb-4 leading-snug group-hover:text-una-purple transition">
+              "MAKING HISTORY TOGETHER" Chronicles Integration feat. Dr. Wendell Gunn
+            </h3>
+            <p class="text-gray-600 text-sm mb-6 line-clamp-3">Most people will remember Governor George Wallace’s famed “Stand at the Schoolhouse Door” at the University of Alabama in June of 1963...</p>
+            <a href="https://aptv.org/apt-news/making-history-together-celebrates-una-success-story/" target="_blank" class="inline-flex items-center justify-center px-6 py-2 bg-una-purple text-una-gold font-bold rounded text-sm hover:bg-una-dark transition">Read More</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STUDENT LIFE & EVENTS ================= -->
+  <section class="py-24 bg-[#f3f3f3]">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        
+        <div class="grid grid-cols-2 gap-4 fade-in-up">
+          <a href="https://www.una.edu/visit" target="_blank" class="col-span-2 h-64 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
+            <img src="https://www.una.edu/images/homepage/xlight-the-fountain.jpeg.pagespeed.ic.lyD2OLIh6z.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </a>
+          <a href="https://www.una.edu/visit" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
+            <img src="https://www.una.edu/images/homepage/xuna-campus-tour.webp.pagespeed.ic.sycnz5Ql-s.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </a>
+          <a href="https://www.una.edu/visit" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
+            <img src="https://www.una.edu/images/homepage/xstep-sing.jpeg.pagespeed.ic.HWqwn3uWZr.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </a>
+        </div>
+
+        <div class="fade-in-up" style="transition-delay: 150ms;">
+          <h2 class="text-4xl font-black text-una-dark mb-2">Student Life</h2>
+          <div class="w-20 h-1.5 bg-una-gold mb-10"></div>
+          
+          <div class="space-y-4 bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            
+            <div class="flex items-start gap-5 pb-4 border-b border-gray-100">
+              <div class="bg-una-light text-una-purple rounded-lg p-3 text-center min-w-[80px] border border-una-purple/10">
+                <span class="block text-xs font-bold uppercase">Oct</span>
+                <span class="block text-2xl font-black leading-none mt-1">10</span>
+              </div>
+              <div class="pt-1">
+                <h4 class="font-bold text-gray-900 text-lg hover:text-una-purple transition">
+                  <a href="https://apps.una.edu/event/rain-or-shine-yard-sale-fundraiser-ed-abroad-to-germany/" target="_blank">Rain or Shine Yard Sale Fundraiser</a>
+                </h4>
+                <p class="text-sm text-gray-500 mt-1 font-medium">7:00 am - 2:00 pm</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-5 pb-4 border-b border-gray-100">
+              <div class="bg-una-light text-una-purple rounded-lg p-3 text-center min-w-[80px] border border-una-purple/10">
+                <span class="block text-xs font-bold uppercase">Oct</span>
+                <span class="block text-2xl font-black leading-none mt-1">10</span>
+              </div>
+              <div class="pt-1">
+                <h4 class="font-bold text-gray-900 text-lg hover:text-una-purple transition">
+                  <a href="https://apps.una.edu/event/pink-alabama-cancer-walk/" target="_blank">Pink Alabama Cancer Walk</a>
+                </h4>
+                <p class="text-sm text-gray-500 mt-1 font-medium">8:00 am - 10:00 am</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-5 pb-4 border-b border-gray-100">
+              <div class="bg-una-light text-una-purple rounded-lg p-3 text-center min-w-[80px] border border-una-purple/10">
+                <span class="block text-xs font-bold uppercase">Oct</span>
+                <span class="block text-2xl font-black leading-none mt-1">10</span>
+              </div>
+              <div class="pt-1">
+                <h4 class="font-bold text-gray-900 text-lg hover:text-una-purple transition">
+                  <a href="https://apps.una.edu/event/fallapalooza/" target="_blank">Fallapalooza</a>
+                </h4>
+                <p class="text-sm text-gray-500 mt-1 font-medium">4:00 pm - 7:00 pm</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-5">
+              <div class="bg-una-purple text-una-gold rounded-lg p-3 text-center min-w-[80px] shadow-inner">
+                <span class="block text-[10px] font-bold uppercase tracking-wider">Oct</span>
+                <span class="block text-xl font-black leading-none mt-1">10-11</span>
+              </div>
+              <div class="pt-1">
+                <h4 class="font-bold text-gray-900 text-lg hover:text-una-purple transition">
+                  <a href="https://apps.una.edu/event/snap-available-152/" target="_blank">SNAP Available</a>
+                </h4>
+                <p class="text-sm text-gray-500 mt-1 font-medium">7:30 pm</p>
+              </div>
+            </div>
+            
+            <a href="https://www.una.edu/calendar" target="_blank" class="block w-full text-center mt-6 py-3 bg-una-gold text-una-dark font-bold rounded hover:bg-yellow-400 transition">View Full Calendar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= AWARDS & FOOTER ================= -->
+  <footer class="bg-[#232323] text-white pt-16 pb-8 border-t-[6px] border-una-gold">
+    <div class="container mx-auto px-6 md:px-12">
+      <!-- US News 로고 이미지 복구 -->
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 mb-16 pb-12 border-b border-white/10 opacity-70">
+        <a href="https://www.usnews.com/best-colleges/university-of-north-alabama-1016" target="_blank">
+          <img src="https://www.una.edu/images/badges/usnews/2026/xregional-universities-south.png.pagespeed.ic.T7wI0s04M1.webp" class="h-20 hover:scale-110 transition cursor-pointer grayscale hover:grayscale-0" alt="US News Best Colleges">
+        </a>
+        <a href="https://www.una.edu/administration/planning-and-research/accreditation.html" target="_blank">
+          <img src="https://www.una.edu/images/accreditation/xxsacscoc-stamp-color.png,Mic.dtX48C00Ga.webp.pagespeed.ic.tPBGG-UcwC.webp" class="h-24 hover:scale-110 transition cursor-pointer grayscale hover:grayscale-0" title="SACSCOC Accredited">
+        </a>
+        <a href="https://www.usnews.com/best-colleges/university-of-north-alabama-1016" target="_blank">
+          <img src="https://una.edu/images/logos/external/2025-usa-today-best-small-college-town.png" class="h-20 hover:scale-110 transition cursor-pointer grayscale hover:grayscale-0" title="USA Today Best Small College Town">
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="md:col-span-1">
+          <a href="https://www.una.edu/" target="_blank">
+            <img src="https://www.una.edu/test/images/x8egras3d.png.pagespeed.ic.Ylg4w2Z-KD.webp" alt="UNA Symbol Logo" class="h-20 w-auto mb-6 drop-shadow-lg hover:opacity-80 transition">
+          </a>
+          <p class="text-gray-300 text-sm mb-2 font-medium">Florence, AL 35632</p>
+          <p class="text-gray-300 text-lg font-bold mb-6">(256) 765-4100</p>
+          
+          <div class="flex gap-4">
+            <a href="https://www.facebook.com/northalabama" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-una-gold transition group" aria-label="Facebook">
+              <svg class="w-5 h-5 fill-current text-white group-hover:text-una-dark transition" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/north_alabama" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-una-gold transition group" aria-label="Instagram">
+              <svg class="w-5 h-5 fill-current text-white group-hover:text-una-dark transition" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://x.com/north_alabama" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-una-gold transition group" aria-label="X">
+              <svg class="w-4 h-4 fill-current text-white group-hover:text-una-dark transition" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/unaroarlions" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-una-gold transition group" aria-label="YouTube">
+              <svg class="w-5 h-5 fill-current text-white group-hover:text-una-dark transition" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-lg mb-6 text-una-gold uppercase tracking-wider">University</h4>
+          <ul class="space-y-3 text-sm text-gray-400 font-medium">
+            <li><a href="https://www.una.edu/administration/planning-and-research/accreditation.html" target="_blank" class="hover:text-white transition">Accreditation</a></li>
+            <li><a href="https://www.una.edu/administration/" target="_blank" class="hover:text-white transition">Administration</a></li>
+            <li><a href="https://www.una.edu/alumni/alumni-update-form.html" target="_blank" class="hover:text-white transition">Alumni OnLION</a></li>
+            <li><a href="https://www.una.edu/pressroom/" target="_blank" class="hover:text-white transition">Campus News</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-lg mb-6 text-una-gold uppercase tracking-wider">Resources</h4>
+          <ul class="space-y-3 text-sm text-gray-400 font-medium">
+            <li><a href="https://www.una.edu/police/" target="_blank" class="hover:text-white transition">Campus Police</a></li>
+            <li><a href="https://www.una.edu/emergency-management/" target="_blank" class="hover:text-white transition">Emergency Info</a></li>
+            <li><a href="https://www.una.edu/humanresources/employment.html" target="_blank" class="hover:text-white transition">Employment</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-lg mb-6 text-una-gold uppercase tracking-wider">Connect</h4>
+          <ul class="space-y-3 text-sm text-gray-400 font-medium">
+            <li><a href="https://theflorala.com/" target="_blank" class="hover:text-white transition">The Flor-Ala</a></li>
+            <li><a href="https://www.una.edu/bistadium" target="_blank" class="hover:text-white transition">BI Stadium</a></li>
+            <li><a href="https://www.una.edu/lionalert/" target="_blank" class="hover:text-white transition">Lion Alert</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium pt-8">
+        <p>Copyright © 2026 | University of North Alabama | All rights reserved.</p>
+        <p class="mt-2 md:mt-0">HCI/UX Redesign Concept Project</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    const header = document.getElementById('mainNav');
+    const topBar = document.getElementById('topBar');
+    const navContainer = document.getElementById('navContainer');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('bg-una-purple', 'shadow-2xl');
+        header.classList.remove('bg-transparent');
+        topBar.classList.add('hidden'); 
+        navContainer.classList.remove('border-white/10');
+        navContainer.classList.add('border-transparent');
+      } else {
+        header.classList.add('bg-transparent');
+        header.classList.remove('bg-una-purple', 'shadow-2xl');
+        topBar.classList.remove('hidden');
+        navContainer.classList.add('border-white/10');
+        navContainer.classList.remove('border-transparent');
+      }
+    });
+
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      
+      if (!mobileMenu.classList.contains('hidden') && window.scrollY <= 50) {
+         header.classList.add('bg-una-purple');
+         header.classList.remove('bg-transparent');
+      } else if (mobileMenu.classList.contains('hidden') && window.scrollY <= 50) {
+         header.classList.add('bg-transparent');
+         header.classList.remove('bg-una-purple');
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
