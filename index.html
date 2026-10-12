@@ -6,7 +6,7 @@
   
   <!-- 파비콘 (브라우저 탭 아이콘) 설정 -->
   <link rel="icon" type="image/png" href="https://www.una.edu/global/images/favicon.ico">
-  <link rel="shortcut icon" href="https://www.una.edu/global/images/favicon.ico">
+  <link rel="shortcut icon" href="url?id=3global/images/favicon.ico">
 
   <!-- 소셜 미디어 공유용 썸네일 및 메타 태그 (오픈그래프) -->
   <title>UNA Redesign Concept | Interactive Prototype</title>
@@ -61,10 +61,11 @@
 <body class="bg-[#f3f3f3] text-gray-800 antialiased overflow-x-hidden">
 
   <!-- ================= HEADER & NAV ================= -->
-  <header id="mainNav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent text-white">
+  <!-- FIX: transition-all을 transition-colors로 변경하여 모바일 렌더링 충돌 방지 -->
+  <header id="mainNav" class="fixed top-0 left-0 w-full z-50 transition-colors duration-300 bg-transparent text-white">
     
-    <!-- Top Utility Bar -->
-    <div class="bg-una-dark text-xs py-2 px-4 lg:px-6 flex justify-between items-center transition-opacity duration-300" id="topBar">
+    <!-- Top Utility Bar (부드러운 Collapse 애니메이션 적용) -->
+    <div class="bg-una-dark text-xs px-4 lg:px-6 flex justify-between items-center transition-all duration-300 overflow-hidden max-h-12 py-2 opacity-100" id="topBar">
       <div class="flex opacity-80">
         <span>(256) 765-4100</span>
       </div>
@@ -73,7 +74,7 @@
         <a href="https://una.instructure.com/" target="_blank" class="hover:text-una-gold transition">Canvas</a>
         <a href="https://experience.elluciancloud.com/uona" target="_blank" class="hover:text-una-gold transition">Portal</a>
         <a href="https://www.una.edu/library/index.html" target="_blank" class="hover:text-una-gold transition">Library</a>
-        <a href="https://www.una.edu/directory/" target="_blank" class="hover:text-una-gold transition hidden sm:inline">Directory</a>
+        <a href="url?id=3directory/" target="_blank" class="hover:text-una-gold transition hidden sm:inline">Directory</a>
       </div>
     </div>
     
@@ -94,12 +95,12 @@
           <div class="absolute left-0 top-12 w-64 bg-white text-gray-800 shadow-2xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col mt-2 border border-gray-100 overflow-hidden">
             <div class="bg-gray-50 px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Get Started!</div>
             <a href="https://www.una.edu/apply/index.html" target="_blank" class="px-4 py-2.5 hover:bg-una-light hover:text-una-purple text-sm font-bold text-una-purple transition">APPLY NOW</a>
-            <a href="https://www.una.edu/request/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Request Information</a>
+            <a href="url?id=3request/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Request Information</a>
             <a href="https://www.una.edu/visit/index" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Tour Campus</a>
             <a href="https://www.una.edu/admissions/costs-expenses.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Costs/Expenses</a>
             <a href="https://www.una.edu/financial-aid/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition border-b border-gray-100">Financial Aid</a>
             <div class="bg-gray-50 px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">How to Apply</div>
-            <a href="https://www.una.edu/admissions/new-freshmen/" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Freshmen</a>
+            <a href="url?id=4/new-freshmen/" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Freshmen</a>
             <a href="https://www.una.edu/graduate/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Graduate Students</a>
             <a href="https://www.una.edu/international/admissions/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">International Students</a>
           </div>
@@ -140,7 +141,7 @@
             <a href="https://university-of-north-alabama-agx9.vivenushop.com/" target="_blank" class="px-4 py-2.5 hover:bg-una-light hover:text-una-purple text-sm font-bold transition">Get Tickets</a>
             <a href="http://www.roarlions.com/calendar.aspx" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition border-b border-gray-100">Game Schedules</a>
             <div class="bg-gray-50 px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Recreation</div>
-            <a href="https://www.una.edu/recsports/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Recreation Center</a>
+            <a href="url?id=3recsports/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Recreation Center</a>
             <a href="https://www.una.edu/recsports/fitness-programs/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Fitness Programs</a>
             <a href="https://www.una.edu/recsports/intramural/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Intramural Sports</a>
           </div>
@@ -212,7 +213,7 @@
           </button>
           <div class="hidden flex-col pb-4 pl-4 text-base font-normal text-gray-300 space-y-4 submenu">
             <a href="https://www.una.edu/academics/majors-minors.html" target="_blank" class="hover:text-una-gold block">Majors & Minors</a>
-            <a href="https://www.una.edu/online/index.html" target="_blank" class="hover:text-una-gold block">Online Programs</a>
+            <a href="url?id=5/index.html" target="_blank" class="hover:text-una-gold block">Online Programs</a>
             <a href="https://www.una.edu/catalog/index.html" target="_blank" class="hover:text-una-gold block">Catalog</a>
             <a href="https://www.una.edu/academics/index.html" target="_blank" class="hover:text-una-gold text-white font-bold block mt-2">Academic Affairs</a>
           </div>
@@ -357,15 +358,15 @@
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         
         <div class="grid grid-cols-2 gap-4 fade-in-up">
-          <a href="https://northalabama.smugmug.com/" target="_blank" class="col-span-2 h-64 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+          <a href="https://www.una.edu/visit" target="_blank" class="col-span-2 h-64 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
             <img src="https://www.una.edu/images/homepage/xlight-the-fountain.jpeg.pagespeed.ic.lyD2OLIh6z.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           </a>
-          <a href="https://northalabama.smugmug.com/" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+          <a href="https://www.una.edu/visit" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
             <img src="https://www.una.edu/images/homepage/xuna-campus-tour.webp.pagespeed.ic.sycnz5Ql-s.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           </a>
-          <a href="https://northalabama.smugmug.com/" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+          <a href="url?id=3visit" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
             <img src="https://www.una.edu/images/homepage/xstep-sing.jpeg.pagespeed.ic.HWqwn3uWZr.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           </a>
@@ -446,7 +447,7 @@
         <a href="https://www.una.edu/administration/planning-and-research/accreditation.html" target="_blank">
           <img src="https://www.una.edu/images/accreditation/xxsacscoc-stamp-color.png,Mic.dtX48C00Ga.webp.pagespeed.ic.tPBGG-UcwC.webp" class="h-24 hover:scale-110 transition cursor-pointer grayscale hover:grayscale-0" title="SACSCOC Accredited">
         </a>
-        <a href="https://www.una.edu/brand/" target="_blank">
+        <a href="https://experience.elluciancloud.com/uona7" target="_blank">
           <img src="https://una.edu/images/logos/external/2025-usa-today-best-small-college-town.png" class="h-20 hover:scale-110 transition cursor-pointer grayscale hover:grayscale-0" title="USA Today Best Small College Town">
         </a>
       </div>
@@ -489,8 +490,8 @@
           <h4 class="font-bold text-lg mb-6 text-una-gold uppercase tracking-wider">Resources</h4>
           <ul class="space-y-3 text-sm text-gray-400 font-medium">
             <li><a href="https://www.una.edu/police/" target="_blank" class="hover:text-white transition">Campus Police</a></li>
-            <li><a href="https://www.una.edu/emergency-management/" target="_blank" class="hover:text-white transition">Emergency Info</a></li>
-            <li><a href="https://www.una.edu/humanresources/employment.html" target="_blank" class="hover:text-white transition">Employment</a></li>
+            <li><a href="url?id=26" target="_blank" class="hover:text-white transition">Emergency Info</a></li>
+            <li><a href="url?id=27" target="_blank" class="hover:text-white transition">Employment</a></li>
           </ul>
         </div>
 
@@ -498,7 +499,7 @@
           <h4 class="font-bold text-lg mb-6 text-una-gold uppercase tracking-wider">Connect</h4>
           <ul class="space-y-3 text-sm text-gray-400 font-medium">
             <li><a href="https://theflorala.com/" target="_blank" class="hover:text-white transition">The Flor-Ala</a></li>
-            <li><a href="https://www.una.edu/bistadium" target="_blank" class="hover:text-white transition">BI Stadium</a></li>
+            <li><a href="https://www.una.edu/library/index.html9" target="_blank" class="hover:text-white transition">BI Stadium</a></li>
             <li><a href="https://www.una.edu/lionalert/" target="_blank" class="hover:text-white transition">Lion Alert</a></li>
           </ul>
         </div>
@@ -513,7 +514,7 @@
 
   <!-- ================= JAVASCRIPT ================= -->
   <script>
-    // 1. 헤더 스크롤 색상 변경
+    // 1. 헤더 스크롤 색상 변경 및 Top Bar 부드러운 숨김(모바일 렌더링 최적화)
     const header = document.getElementById('mainNav');
     const topBar = document.getElementById('topBar');
     const navContainer = document.getElementById('navContainer');
@@ -523,13 +524,20 @@
       if (window.scrollY > 50) {
         header.classList.add('bg-una-purple', 'shadow-2xl');
         header.classList.remove('bg-transparent');
-        topBar.classList.add('hidden'); 
+        
+        // CSS Transition을 활용한 부드러운 Collapse (브라우저 버그 방지)
+        topBar.classList.add('max-h-0', 'py-0', 'opacity-0');
+        topBar.classList.remove('max-h-12', 'py-2', 'opacity-100');
+        
         navContainer.classList.remove('border-white/10');
         navContainer.classList.add('border-transparent');
       } else {
         header.classList.add('bg-transparent');
         header.classList.remove('bg-una-purple', 'shadow-2xl');
-        topBar.classList.remove('hidden');
+        
+        topBar.classList.remove('max-h-0', 'py-0', 'opacity-0');
+        topBar.classList.add('max-h-12', 'py-2', 'opacity-100');
+        
         navContainer.classList.add('border-white/10');
         navContainer.classList.remove('border-transparent');
       }
@@ -550,18 +558,15 @@
       }
     });
 
-    // 3. 모바일 메뉴 아코디언 기능 (서브메뉴 펼치기)
+    // 3. 모바일 메뉴 아코디언 기능
     const accordionBtns = document.querySelectorAll('.mobile-accordion-btn');
     accordionBtns.forEach(btn => {
       btn.addEventListener('click', function() {
         const submenu = this.nextElementSibling;
         const chevron = this.querySelector('.chevron');
         
-        // 서브메뉴 토글
         submenu.classList.toggle('hidden');
         submenu.classList.toggle('flex');
-        
-        // 화살표 회전 애니메이션
         chevron.classList.toggle('rotate-180');
       });
     });
