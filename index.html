@@ -3,7 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- 파비콘 (브라우저 탭 아이콘) 설정 -->
+  <link rel="icon" type="image/png" href="https://www.una.edu/global/images/favicon.ico">
+  <link rel="shortcut icon" href="https://www.una.edu/global/images/favicon.ico">
+
+  <!-- 소셜 미디어 공유용 썸네일 및 메타 태그 (오픈그래프) -->
   <title>UNA Redesign Concept | Interactive Prototype</title>
+  <meta name="description" content="University of North Alabama Web Redesign Concept by Yumin Choi.">
+  <meta property="og:title" content="UNA Web Redesign Concept | HCI/UX Project">
+  <meta property="og:description" content="Interactive prototype for the University of North Alabama website redesign.">
+  <meta property="og:image" content="https://www.una.edu/images/shared.png">
+  <meta property="og:url" content="https://yumin628.github.io/UNA-web-redesign/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="UNA Web Redesign Concept | HCI/UX Project">
+  <meta name="twitter:image" content="https://www.una.edu/images/shared.png">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <script>
@@ -47,13 +63,13 @@
   <!-- ================= HEADER & NAV ================= -->
   <header id="mainNav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent text-white">
     
-    <!-- Top Utility Bar (실제 URL 연동) -->
+    <!-- Top Utility Bar -->
     <div class="bg-una-dark text-xs py-2 px-4 lg:px-6 flex justify-between items-center transition-opacity duration-300" id="topBar">
       <div class="flex opacity-80">
         <span>(256) 765-4100</span>
       </div>
       <div class="flex gap-4 ml-auto font-medium">
-        <a href="https://www.una.edu/visit/index" target="_blank" class="hover:text-una-gold transition hidden sm:inline">Visit</a>
+        <a href="https://www.una.edu/visit/index.html" target="_blank" class="hover:text-una-gold transition hidden sm:inline">Visit</a>
         <a href="https://una.instructure.com/" target="_blank" class="hover:text-una-gold transition">Canvas</a>
         <a href="https://experience.elluciancloud.com/uona" target="_blank" class="hover:text-una-gold transition">Portal</a>
         <a href="https://www.una.edu/library/index.html" target="_blank" class="hover:text-una-gold transition">Library</a>
@@ -163,7 +179,7 @@
     <!-- 모바일 드롭다운 메뉴 (아코디언 적용) -->
     <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-una-dark/95 backdrop-blur-md border-t border-white/10 shadow-2xl transition-all duration-300">
       
-      <!-- 모바일용 검색창 추가 -->
+      <!-- 모바일용 검색창 -->
       <div class="px-6 py-4 border-b border-white/10">
         <form action="https://www.una.edu/search/index.html" method="get" target="_blank" class="flex items-center bg-white/10 rounded-full px-4 py-2.5 border border-white/20">
           <input type="text" name="q-mbl" placeholder="Search UNA.edu" class="bg-transparent border-none text-white text-base outline-none placeholder-white/60 w-full font-medium">
@@ -430,7 +446,7 @@
         <a href="https://www.una.edu/administration/planning-and-research/accreditation.html" target="_blank">
           <img src="https://www.una.edu/images/accreditation/xxsacscoc-stamp-color.png,Mic.dtX48C00Ga.webp.pagespeed.ic.tPBGG-UcwC.webp" class="h-24 hover:scale-110 transition cursor-pointer grayscale hover:grayscale-0" title="SACSCOC Accredited">
         </a>
-        <a href="https://www.usnews.com/best-colleges/university-of-north-alabama-1016" target="_blank">
+        <a href="https://www.una.edu/brand/" target="_blank">
           <img src="https://una.edu/images/logos/external/2025-usa-today-best-small-college-town.png" class="h-20 hover:scale-110 transition cursor-pointer grayscale hover:grayscale-0" title="USA Today Best Small College Town">
         </a>
       </div>
