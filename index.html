@@ -61,11 +61,11 @@
 <body class="bg-[#f3f3f3] text-gray-800 antialiased overflow-x-hidden">
 
   <!-- ================= HEADER & NAV ================= -->
-  <!-- FIX: 삼성 브라우저 호환성을 위해 안전한 transition-colors 사용 -->
-  <header id="mainNav" class="fixed top-0 left-0 w-full z-50 transition-colors duration-300 bg-transparent text-white">
+  <!-- FIX: 삼성 브라우저 렌더링 버그 해결을 위해 transform 방식 적용 -->
+  <header id="mainNav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent text-white">
     
-    <!-- Top Utility Bar (삼성 브라우저 버그 방지를 위해 단순 hidden 처리로 복귀) -->
-    <div class="bg-una-dark text-xs px-4 lg:px-6 py-2 flex justify-between items-center" id="topBar">
+    <!-- Top Utility Bar (높이를 고정하여 스크롤 시 위로 밀려 올라가게 설계) -->
+    <div class="h-[40px] bg-una-dark text-xs px-4 lg:px-6 flex justify-between items-center" id="topBar">
       <div class="flex opacity-80">
         <span>(256) 765-4100</span>
       </div>
@@ -86,7 +86,7 @@
         <img src="https://www.una.edu/images/homepage/una_horiz_fulclr_dkbg.svg" alt="University of North Alabama Logo" class="absolute top-1/2 -left-8 lg:-left-12 -translate-y-1/2 h-36 lg:h-52 w-auto max-w-none drop-shadow-md">
       </a>
       
-      <!-- 데스크톱용 메인 메뉴 (드롭다운 적용) -->
+      <!-- 데스크톱용 메인 메뉴 -->
       <nav class="hidden lg:flex gap-8 font-semibold tracking-wide text-sm ml-auto mr-8 h-full items-center">
         
         <!-- APPLY 드롭다운 -->
@@ -358,15 +358,15 @@
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         
         <div class="grid grid-cols-2 gap-4 fade-in-up">
-          <a href="https://www.una.edu/visit" target="_blank" class="col-span-2 h-64 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+          <a href="https://www.una.edu/visit/index.html" target="_blank" class="col-span-2 h-64 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
             <img src="https://www.una.edu/images/homepage/xlight-the-fountain.jpeg.pagespeed.ic.lyD2OLIh6z.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           </a>
-          <a href="https://www.una.edu/visit" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+          <a href="https://www.una.edu/visit/index.html" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
             <img src="https://www.una.edu/images/homepage/xuna-campus-tour.webp.pagespeed.ic.sycnz5Ql-s.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           </a>
-          <a href="https://www.una.edu/visit" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+          <a href="https://www.una.edu/visit/index.html" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
             <img src="https://www.una.edu/images/homepage/xstep-sing.jpeg.pagespeed.ic.HWqwn3uWZr.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           </a>
@@ -514,39 +514,31 @@
 
   <!-- ================= JAVASCRIPT ================= -->
   <script>
-    // 1. 헤더 스크롤 색상 변경 (삼성 브라우저 대응)
+    // 1. 헤더 스크롤 색상 변경 및 translateY 활용한 모바일 버그 완벽 대응
     const header = document.getElementById('mainNav');
-    const topBar = document.getElementById('topBar');
-    const navContainer = document.getElementById('navContainer');
-    const mobileMenu = document.getElementById('mobileMenu');
+    let isScrolled = false;
     
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('bg-una-purple', 'shadow-2xl');
+      if (window.scrollY > 50 && !isScrolled) {
+        isScrolled = true;
+        // 높이를 줄이지 않고 헤더 전체를 위로 -40px 만큼 밀어 올려서 Top Bar를 가림
+        header.classList.add('bg-una-purple', 'shadow-2xl', '-translate-y-[40px]');
         header.classList.remove('bg-transparent');
-        
-        // CSS transition 충돌 방지를 위해 단순히 클래스만 토글하여 숨김 처리
-        topBar.classList.add('hidden');
-        
-        navContainer.classList.remove('border-white/10');
-        navContainer.classList.add('border-transparent');
-      } else {
+      } else if (window.scrollY <= 50 && isScrolled) {
+        isScrolled = false;
+        header.classList.remove('bg-una-purple', 'shadow-2xl', '-translate-y-[40px]');
         header.classList.add('bg-transparent');
-        header.classList.remove('bg-una-purple', 'shadow-2xl');
-        
-        topBar.classList.remove('hidden');
-        
-        navContainer.classList.add('border-white/10');
-        navContainer.classList.remove('border-transparent');
       }
     });
 
     // 2. 모바일 햄버거 메뉴 토글
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
     
     mobileMenuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
       
+      // 모바일 메뉴가 열려있을 때 스크롤이 최상단이어도 배경을 보라색으로 처리
       if (!mobileMenu.classList.contains('hidden') && window.scrollY <= 50) {
          header.classList.add('bg-una-purple');
          header.classList.remove('bg-transparent');
