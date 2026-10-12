@@ -35,6 +35,11 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* 모바일 스크롤 최적화 */
+    .mobile-menu-scroll {
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+    }
   </style>
 </head>
 <body class="bg-[#f3f3f3] text-gray-800 antialiased overflow-x-hidden">
@@ -42,14 +47,13 @@
   <!-- ================= HEADER & NAV ================= -->
   <header id="mainNav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent text-white">
     
-    <!-- Top Utility Bar -->
+    <!-- Top Utility Bar (실제 URL 연동) -->
     <div class="bg-una-dark text-xs py-2 px-4 lg:px-6 flex justify-between items-center transition-opacity duration-300" id="topBar">
       <div class="flex opacity-80">
         <span>(256) 765-4100</span>
       </div>
-      <!-- 상단 유틸리티 링크 스타일 통일 (볼드, 노란색 제거) -->
       <div class="flex gap-4 ml-auto font-medium">
-        <a href="https://www.una.edu/visit/index.html" target="_blank" class="hover:text-una-gold transition hidden sm:inline">Visit</a>
+        <a href="https://www.una.edu/visit/index" target="_blank" class="hover:text-una-gold transition hidden sm:inline">Visit</a>
         <a href="https://una.instructure.com/" target="_blank" class="hover:text-una-gold transition">Canvas</a>
         <a href="https://experience.elluciancloud.com/uona" target="_blank" class="hover:text-una-gold transition">Portal</a>
         <a href="https://www.una.edu/library/index.html" target="_blank" class="hover:text-una-gold transition">Library</a>
@@ -58,25 +62,87 @@
     </div>
     
     <!-- Main Navbar -->
-    <div class="px-4 lg:px-6 py-3 lg:py-4 flex justify-between items-center border-b border-white/10 transition-colors duration-300" id="navContainer">
+    <div class="px-4 lg:px-6 py-3 lg:py-4 flex justify-between items-center border-b border-white/10 transition-colors duration-300 relative" id="navContainer">
       
       <!-- 공식 로고 -->
-      <a href="https://www.una.edu/" class="relative flex items-center h-10 w-40 lg:h-14 lg:w-60 cursor-pointer hover:opacity-90 transition shrink-0">
-        <img src="https://www.una.edu/images/homepage/una_horiz_fulclr_dkbg.svg" 
-             alt="University of North Alabama Logo" 
-             class="absolute top-1/2 left-0 lg:-left-2 -translate-y-1/2 h-28 lg:h-40 w-auto max-w-none drop-shadow-md">
+      <a href="https://www.una.edu/" class="relative flex items-center h-12 w-52 lg:h-16 lg:w-72 cursor-pointer hover:opacity-90 transition shrink-0 z-10">
+        <img src="https://www.una.edu/images/homepage/una_horiz_fulclr_dkbg.svg" alt="University of North Alabama Logo" class="absolute top-1/2 -left-8 lg:-left-12 -translate-y-1/2 h-36 lg:h-52 w-auto max-w-none drop-shadow-md">
       </a>
       
-      <!-- 데스크톱용 메인 메뉴 -->
-      <nav class="hidden lg:flex gap-8 font-semibold tracking-wide text-sm ml-auto mr-8">
-        <a href="https://www.una.edu/apply/index.html" target="_blank" class="hover:text-una-gold transition">APPLY</a>
-        <a href="https://www.una.edu/academics/index.html" target="_blank" class="hover:text-una-gold transition">LEARN</a>
-        <a href="https://www.una.edu/studentaffairs/index.html" target="_blank" class="hover:text-una-gold transition">CONNECT</a>
-        <a href="http://www.roarlions.com/" target="_blank" class="hover:text-una-gold transition">SPORTS</a>
-        <a href="https://www.una.edu/alumni/index.html" target="_blank" class="hover:text-una-gold transition">ALUMNI</a>
+      <!-- 데스크톱용 메인 메뉴 (드롭다운 적용) -->
+      <nav class="hidden lg:flex gap-8 font-semibold tracking-wide text-sm ml-auto mr-8 h-full items-center">
+        
+        <!-- APPLY 드롭다운 -->
+        <div class="relative group py-4">
+          <a href="https://www.una.edu/apply/index.html" class="flex items-center gap-1 hover:text-una-gold transition">APPLY <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+          <div class="absolute left-0 top-12 w-64 bg-white text-gray-800 shadow-2xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col mt-2 border border-gray-100 overflow-hidden">
+            <div class="bg-gray-50 px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Get Started!</div>
+            <a href="https://www.una.edu/apply/index.html" target="_blank" class="px-4 py-2.5 hover:bg-una-light hover:text-una-purple text-sm font-bold text-una-purple transition">APPLY NOW</a>
+            <a href="https://www.una.edu/request/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Request Information</a>
+            <a href="https://www.una.edu/visit/index" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Tour Campus</a>
+            <a href="https://www.una.edu/admissions/costs-expenses.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Costs/Expenses</a>
+            <a href="https://www.una.edu/financial-aid/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition border-b border-gray-100">Financial Aid</a>
+            <div class="bg-gray-50 px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">How to Apply</div>
+            <a href="https://www.una.edu/admissions/new-freshmen/" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Freshmen</a>
+            <a href="https://www.una.edu/graduate/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Graduate Students</a>
+            <a href="https://www.una.edu/international/admissions/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">International Students</a>
+          </div>
+        </div>
+
+        <!-- LEARN 드롭다운 -->
+        <div class="relative group py-4">
+          <a href="https://www.una.edu/academics/index.html" class="flex items-center gap-1 hover:text-una-gold transition">LEARN <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+          <div class="absolute left-0 top-12 w-64 bg-white text-gray-800 shadow-2xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col mt-2 border border-gray-100 overflow-hidden">
+            <div class="bg-gray-50 px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Study at UNA</div>
+            <a href="https://www.una.edu/academics/majors-minors.html" target="_blank" class="px-4 py-2.5 hover:bg-una-light hover:text-una-purple text-sm font-bold transition">Majors & Minors</a>
+            <a href="https://www.una.edu/online/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Online Programs</a>
+            <a href="https://www.una.edu/catalog/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition border-b border-gray-100">Catalog</a>
+            <div class="bg-gray-50 px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Colleges</div>
+            <a href="https://www.una.edu/artsandsciences/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Arts, Sciences & Engineering</a>
+            <a href="https://www.una.edu/business/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Business & Technology</a>
+            <a href="https://www.una.edu/education/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Education & Human Sciences</a>
+            <a href="https://www.una.edu/nursing/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Nursing & Health Professions</a>
+          </div>
+        </div>
+
+        <!-- CONNECT 드롭다운 -->
+        <div class="relative group py-4">
+          <a href="https://www.una.edu/studentaffairs/index.html" class="flex items-center gap-1 hover:text-una-gold transition">CONNECT <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+          <div class="absolute left-0 top-12 w-64 bg-white text-gray-800 shadow-2xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col mt-2 border border-gray-100 overflow-hidden">
+            <a href="https://una.campusgroups.com/" target="_blank" class="px-4 py-3 hover:bg-una-light hover:text-una-purple text-sm transition">Campus Groups</a>
+            <a href="https://www.una.edu/students/FSL/" target="_blank" class="px-4 py-3 hover:bg-una-light hover:text-una-purple text-sm transition">Fraternity & Sorority Life</a>
+            <a href="https://www.una.edu/housing/" target="_blank" class="px-4 py-3 hover:bg-una-light hover:text-una-purple text-sm transition">Housing & Residence Life</a>
+            <a href="https://www.una.edu/student-activities/" target="_blank" class="px-4 py-3 hover:bg-una-light hover:text-una-purple text-sm transition border-t border-gray-100 font-bold text-una-purple">Student Activities</a>
+          </div>
+        </div>
+
+        <!-- SPORTS 드롭다운 -->
+        <div class="relative group py-4">
+          <a href="http://www.roarlions.com/" class="flex items-center gap-1 hover:text-una-gold transition">SPORTS <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+          <div class="absolute left-0 top-12 w-64 bg-white text-gray-800 shadow-2xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col mt-2 border border-gray-100 overflow-hidden">
+            <div class="bg-gray-50 px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Athletics</div>
+            <a href="https://university-of-north-alabama-agx9.vivenushop.com/" target="_blank" class="px-4 py-2.5 hover:bg-una-light hover:text-una-purple text-sm font-bold transition">Get Tickets</a>
+            <a href="http://www.roarlions.com/calendar.aspx" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition border-b border-gray-100">Game Schedules</a>
+            <div class="bg-gray-50 px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Recreation</div>
+            <a href="https://www.una.edu/recsports/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Recreation Center</a>
+            <a href="https://www.una.edu/recsports/fitness-programs/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Fitness Programs</a>
+            <a href="https://www.una.edu/recsports/intramural/index.html" target="_blank" class="px-4 py-2 hover:bg-una-light hover:text-una-purple text-sm transition">Intramural Sports</a>
+          </div>
+        </div>
+
+        <!-- ALUMNI 드롭다운 -->
+        <div class="relative group py-4">
+          <a href="https://www.una.edu/alumni/index.html" class="flex items-center gap-1 hover:text-una-gold transition">ALUMNI <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+          <div class="absolute right-0 top-12 w-64 bg-white text-gray-800 shadow-2xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col mt-2 border border-gray-100 overflow-hidden">
+            <a href="https://www.una.edu/alumni/una-alumni-association/alumni-chapters.html" target="_blank" class="px-4 py-3 hover:bg-una-light hover:text-una-purple text-sm transition">Alumni Chapters</a>
+            <a href="https://www.una.edu/alumni/events/index.html" target="_blank" class="px-4 py-3 hover:bg-una-light hover:text-una-purple text-sm transition">Alumni Events</a>
+            <a href="https://www.una.edu/career/index.html" target="_blank" class="px-4 py-3 hover:bg-una-light hover:text-una-purple text-sm transition border-b border-gray-100">Career Center</a>
+            <a href="https://www.una.edu/alumni/index.html" target="_blank" class="px-4 py-3 hover:bg-una-light hover:text-una-purple text-sm transition font-bold text-una-purple">Alumni Relations</a>
+          </div>
+        </div>
       </nav>
 
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4 z-20">
         <!-- 데스크톱용 검색창 -->
         <form action="https://www.una.edu/search/index.html" method="get" target="_blank" class="hidden lg:flex items-center bg-white/10 rounded-full px-4 py-1.5 backdrop-blur border border-white/20">
           <input type="text" name="q" placeholder="Search UNA.edu" class="bg-transparent border-none text-white text-sm outline-none placeholder-white/60 w-32 focus:w-48 transition-all font-medium">
@@ -86,7 +152,7 @@
         </form>
 
         <!-- 모바일용 햄버거 메뉴 버튼 -->
-        <button id="mobileMenuBtn" class="lg:hidden text-white hover:text-una-gold focus:outline-none p-2 transition-colors z-50">
+        <button id="mobileMenuBtn" class="lg:hidden text-white hover:text-una-gold focus:outline-none p-2 transition-colors">
           <svg class="w-8 h-8 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -94,14 +160,87 @@
       </div>
     </div>
 
-    <!-- 모바일 드롭다운 메뉴 -->
+    <!-- 모바일 드롭다운 메뉴 (아코디언 적용) -->
     <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-una-dark/95 backdrop-blur-md border-t border-white/10 shadow-2xl transition-all duration-300">
-      <nav class="flex flex-col px-6 py-4 text-white font-semibold text-lg">
-        <a href="https://www.una.edu/apply/index.html" target="_blank" class="py-4 border-b border-white/10 hover:text-una-gold transition">APPLY</a>
-        <a href="https://www.una.edu/academics/index.html" target="_blank" class="py-4 border-b border-white/10 hover:text-una-gold transition">LEARN</a>
-        <a href="https://www.una.edu/studentaffairs/index.html" target="_blank" class="py-4 border-b border-white/10 hover:text-una-gold transition">CONNECT</a>
-        <a href="http://www.roarlions.com/" target="_blank" class="py-4 border-b border-white/10 hover:text-una-gold transition">SPORTS</a>
-        <a href="https://www.una.edu/alumni/index.html" target="_blank" class="py-4 hover:text-una-gold transition">ALUMNI</a>
+      
+      <!-- 모바일용 검색창 추가 -->
+      <div class="px-6 py-4 border-b border-white/10">
+        <form action="https://www.una.edu/search/index.html" method="get" target="_blank" class="flex items-center bg-white/10 rounded-full px-4 py-2.5 border border-white/20">
+          <input type="text" name="q-mbl" placeholder="Search UNA.edu" class="bg-transparent border-none text-white text-base outline-none placeholder-white/60 w-full font-medium">
+          <button type="submit">
+            <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </button>
+        </form>
+      </div>
+
+      <nav class="flex flex-col px-6 py-2 text-white font-semibold text-lg mobile-menu-scroll">
+        
+        <!-- 모바일 APPLY -->
+        <div class="border-b border-white/10">
+          <button class="w-full flex justify-between items-center py-4 hover:text-una-gold transition mobile-accordion-btn">
+            APPLY <svg class="w-5 h-5 transform transition-transform chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="hidden flex-col pb-4 pl-4 text-base font-normal text-gray-300 space-y-4 submenu">
+            <a href="https://www.una.edu/apply/index.html" target="_blank" class="hover:text-una-gold text-white font-bold block">APPLY NOW</a>
+            <a href="https://www.una.edu/request/index.html" target="_blank" class="hover:text-una-gold block">Request Information</a>
+            <a href="https://www.una.edu/visit/index" target="_blank" class="hover:text-una-gold block">Tour Campus</a>
+            <a href="https://www.una.edu/admissions/costs-expenses.html" target="_blank" class="hover:text-una-gold block">Costs/Expenses</a>
+            <a href="https://www.una.edu/financial-aid/index.html" target="_blank" class="hover:text-una-gold block">Financial Aid</a>
+          </div>
+        </div>
+
+        <!-- 모바일 LEARN -->
+        <div class="border-b border-white/10">
+          <button class="w-full flex justify-between items-center py-4 hover:text-una-gold transition mobile-accordion-btn">
+            LEARN <svg class="w-5 h-5 transform transition-transform chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="hidden flex-col pb-4 pl-4 text-base font-normal text-gray-300 space-y-4 submenu">
+            <a href="https://www.una.edu/academics/majors-minors.html" target="_blank" class="hover:text-una-gold block">Majors & Minors</a>
+            <a href="https://www.una.edu/online/index.html" target="_blank" class="hover:text-una-gold block">Online Programs</a>
+            <a href="https://www.una.edu/catalog/index.html" target="_blank" class="hover:text-una-gold block">Catalog</a>
+            <a href="https://www.una.edu/academics/index.html" target="_blank" class="hover:text-una-gold text-white font-bold block mt-2">Academic Affairs</a>
+          </div>
+        </div>
+
+        <!-- 모바일 CONNECT -->
+        <div class="border-b border-white/10">
+          <button class="w-full flex justify-between items-center py-4 hover:text-una-gold transition mobile-accordion-btn">
+            CONNECT <svg class="w-5 h-5 transform transition-transform chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="hidden flex-col pb-4 pl-4 text-base font-normal text-gray-300 space-y-4 submenu">
+            <a href="https://una.campusgroups.com/" target="_blank" class="hover:text-una-gold block">Campus Groups</a>
+            <a href="https://www.una.edu/students/FSL/" target="_blank" class="hover:text-una-gold block">Fraternity & Sorority Life</a>
+            <a href="https://www.una.edu/housing/" target="_blank" class="hover:text-una-gold block">Housing & Residence Life</a>
+            <a href="https://www.una.edu/studentaffairs/index.html" target="_blank" class="hover:text-una-gold text-white font-bold block mt-2">Division of Student Affairs</a>
+          </div>
+        </div>
+
+        <!-- 모바일 SPORTS -->
+        <div class="border-b border-white/10">
+          <button class="w-full flex justify-between items-center py-4 hover:text-una-gold transition mobile-accordion-btn">
+            SPORTS <svg class="w-5 h-5 transform transition-transform chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="hidden flex-col pb-4 pl-4 text-base font-normal text-gray-300 space-y-4 submenu">
+            <a href="https://university-of-north-alabama-agx9.vivenushop.com/" target="_blank" class="hover:text-una-gold block">Get Tickets</a>
+            <a href="http://www.roarlions.com/calendar.aspx" target="_blank" class="hover:text-una-gold block">Game Schedules</a>
+            <a href="https://www.una.edu/recsports/index.html" target="_blank" class="hover:text-una-gold block">Recreation Center</a>
+            <a href="http://www.roarlions.com/" target="_blank" class="hover:text-una-gold text-white font-bold block mt-2">University Athletics</a>
+          </div>
+        </div>
+
+        <!-- 모바일 ALUMNI -->
+        <div>
+          <button class="w-full flex justify-between items-center py-4 hover:text-una-gold transition mobile-accordion-btn">
+            ALUMNI <svg class="w-5 h-5 transform transition-transform chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="hidden flex-col pb-4 pl-4 text-base font-normal text-gray-300 space-y-4 submenu">
+            <a href="https://www.una.edu/alumni/una-alumni-association/alumni-chapters.html" target="_blank" class="hover:text-una-gold block">Alumni Chapters</a>
+            <a href="https://www.una.edu/alumni/events/index.html" target="_blank" class="hover:text-una-gold block">Alumni Events</a>
+            <a href="https://www.una.edu/career/index.html" target="_blank" class="hover:text-una-gold block">Career Center</a>
+            <a href="https://www.una.edu/alumni/index.html" target="_blank" class="hover:text-una-gold text-white font-bold block mt-2">Alumni Relations</a>
+          </div>
+        </div>
+
       </nav>
     </div>
   </header>
@@ -161,7 +300,7 @@
               UNA Ranked Among U.S. News Best Regional Universities For 5 Consecutive Years
             </h3>
             <p class="text-gray-600 text-sm mb-6 line-clamp-3">For a fifth consecutive year, the University of North Alabama has ranked among the Best Regional Universities (South) category in the U.S. News...</p>
-            <a href="https://www.una.edu/pressroom/" target="_blank" class="inline-flex items-center justify-center px-6 py-2 bg-una-purple text-una-gold font-bold rounded text-sm hover:bg-una-dark transition">Read More</a>
+            <a href="https://www.una.edu/pressroom/2026/09/una-ranked-among-us-news-and-world-reports-best-regional-universities-south-for-five-consecutive-years-earns-new-distinctions.html" target="_blank" class="inline-flex items-center justify-center px-6 py-2 bg-una-purple text-una-gold font-bold rounded text-sm hover:bg-una-dark transition">Read More</a>
           </div>
         </article>
 
@@ -175,7 +314,7 @@
               Alumnus Jim Blasingame Makes Unique Catalog Available via Gift
             </h3>
             <p class="text-gray-600 text-sm mb-6 line-clamp-3">Jim Blasingame ’72 has made his significant and vital body of work available to all comers after his gift to the Sanders College of Business and Collier Library...</p>
-            <a href="https://www.una.edu/pressroom/" target="_blank" class="inline-flex items-center justify-center px-6 py-2 bg-una-purple text-una-gold font-bold rounded text-sm hover:bg-una-dark transition">Read More</a>
+            <a href="https://www.una.edu/pressroom/2026/09/una-alumnus-and-podcasting-pioneer-jim-blasingame-makes-unique-digital-catalog-available-to-all-thanks-to-gift-to-the-sanders-college-of-business-and-technology-and-collier-library.html" target="_blank" class="inline-flex items-center justify-center px-6 py-2 bg-una-purple text-una-gold font-bold rounded text-sm hover:bg-una-dark transition">Read More</a>
           </div>
         </article>
 
@@ -202,15 +341,15 @@
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         
         <div class="grid grid-cols-2 gap-4 fade-in-up">
-          <a href="https://www.una.edu/visit" target="_blank" class="col-span-2 h-64 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+          <a href="https://northalabama.smugmug.com/" target="_blank" class="col-span-2 h-64 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
             <img src="https://www.una.edu/images/homepage/xlight-the-fountain.jpeg.pagespeed.ic.lyD2OLIh6z.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           </a>
-          <a href="https://www.una.edu/visit" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+          <a href="https://northalabama.smugmug.com/" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
             <img src="https://www.una.edu/images/homepage/xuna-campus-tour.webp.pagespeed.ic.sycnz5Ql-s.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           </a>
-          <a href="https://www.una.edu/visit" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
+          <a href="https://northalabama.smugmug.com/" target="_blank" class="h-48 rounded-xl overflow-hidden shadow-md cursor-pointer block relative group">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition z-10"></div>
             <img src="https://www.una.edu/images/homepage/xstep-sing.jpeg.pagespeed.ic.HWqwn3uWZr.webp" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           </a>
@@ -284,7 +423,6 @@
   <!-- ================= AWARDS & FOOTER ================= -->
   <footer class="bg-[#232323] text-white pt-16 pb-8 border-t-[6px] border-una-gold">
     <div class="container mx-auto px-6 md:px-12">
-      <!-- US News 로고 이미지 복구 -->
       <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 mb-16 pb-12 border-b border-white/10 opacity-70">
         <a href="https://www.usnews.com/best-colleges/university-of-north-alabama-1016" target="_blank">
           <img src="https://www.una.edu/images/badges/usnews/2026/xregional-universities-south.png.pagespeed.ic.T7wI0s04M1.webp" class="h-20 hover:scale-110 transition cursor-pointer grayscale hover:grayscale-0" alt="US News Best Colleges">
@@ -350,7 +488,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium pt-8 border-t border-white/10">
         <p>Copyright © 2026 | University of North Alabama | All rights reserved.</p>
         <p class="mt-2 md:mt-0">HCI/UX Redesign Concept Project</p>
       </div>
@@ -359,6 +497,7 @@
 
   <!-- ================= JAVASCRIPT ================= -->
   <script>
+    // 1. 헤더 스크롤 색상 변경
     const header = document.getElementById('mainNav');
     const topBar = document.getElementById('topBar');
     const navContainer = document.getElementById('navContainer');
@@ -380,6 +519,7 @@
       }
     });
 
+    // 2. 모바일 햄버거 메뉴 토글
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     
     mobileMenuBtn.addEventListener('click', () => {
@@ -394,6 +534,23 @@
       }
     });
 
+    // 3. 모바일 메뉴 아코디언 기능 (서브메뉴 펼치기)
+    const accordionBtns = document.querySelectorAll('.mobile-accordion-btn');
+    accordionBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const submenu = this.nextElementSibling;
+        const chevron = this.querySelector('.chevron');
+        
+        // 서브메뉴 토글
+        submenu.classList.toggle('hidden');
+        submenu.classList.toggle('flex');
+        
+        // 화살표 회전 애니메이션
+        chevron.classList.toggle('rotate-180');
+      });
+    });
+
+    // 4. 스크롤 애니메이션
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
